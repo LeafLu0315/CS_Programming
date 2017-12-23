@@ -1,0 +1,47 @@
+\documentclass[12pt,a4paper]{article}
+\iffalse
+\usepackage{fontspec}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{extsizes}
+\pagestyle{empty}
+\tabcolsep=0pt
+\parindent=0pt
+\setmainfont[Ligatures = NoCommon,Mapping=tex-text]{Calibri}
+\usepackage[margin=3cm]{geometry}
+\fi
+\begin{document}
+
+\begin{center}
+{\LARGE\textbf{Decompression}}\\
+Time limit: 1 second
+\end{center}
+
+\section*{Problem Description}
+
+A compressed string consists of any number of pairs, where each pair consists of (number, pattern). A pattern can be a sub-string with any length, e.g.,``ab''. The number designates the number of repetition of the pattern. This assignment is to decompress the compressed string. For example, we will decompress ``3ab'' into ``ababab''.\\
+
+\section*{Input File Format}
+
+The input file consists of a number of strings, where each string is separated by a newline.
+Each number is between 1 and 9, and the string consists of only English characters. Each compressed string is known to be less than 1024 characters. However, the decompressed string will be longer than 1024bytes.\\
+
+\section*{Output Format}
+
+Output the decompressed strings, one line for one test case.\\
+
+\section*{Sample Input}
+\begin{verbatim}
+2a3bc
+1ABC3abc
+2a3b5xyz1d
+\end{verbatim}
+
+\section*{Sample Output}
+\begin{verbatim}
+aabcbcbc
+ABCabcabcabc
+aabbbxyzxyzxyzxyzxyzd
+\end{verbatim}
+
+\end{document}

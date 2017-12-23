@@ -1,0 +1,2 @@
+N改到5000，N^2的方法還是很快，N^3會TLE(AR08bad.c)。
+加了hint用prefix sum
