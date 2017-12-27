@@ -1,2 +1,0 @@
-# CSIE_PROGRAMMING
-

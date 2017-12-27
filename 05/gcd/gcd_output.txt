@@ -1,7 +1,0 @@
-gcd(11112,1)=1, using 1 division.
-gcd(40,24)=8, using 3 division.
-gcd(31,6)=1, using 2 division.
-gcd(34,119)=17, using 3 division.
-gcd(218790,474045)=36465, using 3 division.
-gcd(413169269,251230)=3589, using 7 division.
-gcd(359766,282350898)=32706, using 5 division.
