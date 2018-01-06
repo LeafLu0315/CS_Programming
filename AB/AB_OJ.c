@@ -24,11 +24,11 @@ int main(){
                 continue;
             }
             sep(Garr,guess);
-            if(duplicate(Garr)){
-                if(guess<1000) printf("0%d is an invalid guess.\n",guess);
-                else printf("%d is an invalid guess.\n",guess);
-                continue;
-            }
+//            if(duplicate(Garr)){
+//                if(guess<1000) printf("0%d is an invalid guess.\n",guess);
+//                else printf("%d is an invalid guess.\n",guess);
+//                continue;
+//            }
             //Initialize
             A=B=0;
             for(i=0;i<NUMBERS;i++) flag[i]=1;
