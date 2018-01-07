@@ -75,7 +75,6 @@ int main(){
                 printf("ERROR ACTION !\n");
                 continue;
         }
-        d=0;
         if(!loop) break;
         if(loop == 2) continue;
         //initialize
