@@ -2,7 +2,7 @@
 int gcd(int,int);
 void factors(int);
 int main(){
-    int times,Q1,Q2,R1,R2,Gcd;
+    int times,Q1,Q2,R1,R2;
     scanf("%d",&times);
     while(times--){
         scanf("%d%d%d%d",&Q1,&R1,&Q2,&R2);
