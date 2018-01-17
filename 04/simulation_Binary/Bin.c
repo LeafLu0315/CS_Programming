@@ -4,6 +4,7 @@ int toInt(char []);
 int main(){
     int ans,count;
     char str[40];
+    freopen("simulation_Binary.in","r",stdin);
     while(1){
         ans=0;
         scanf("%d",&count);
