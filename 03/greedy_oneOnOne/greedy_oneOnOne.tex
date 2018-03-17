@@ -1,0 +1,51 @@
+\documentclass[12pt,titlepage]{article}
+\topmargin 0pt
+\advance \topmargin by -\headheight
+\advance \topmargin by -\headsep
+
+\textheight 9.4in
+
+\oddsidemargin 0pt
+\evensidemargin \oddsidemargin
+\marginparwidth 0.5in
+
+\textwidth 6.5in
+\usepackage{epsfig}
+\usepackage{graphicx}
+
+\begin{document}
+\section*{\centering One on one\\
+Time limit: 5 second}
+
+\subsection*{Problem Description}
+\hspace{0.7cm}There are $n$ enemies and you have also $n$ soldiers. Every enemy or soldier has a power value which is an integer between 0 and 60000. When a solder an enemy, the one with higher power value wins. You need to assign each soldier to one enemy so as to maximize the number of wins. Note that each soldier can only meet one enemy and there is no winer if their power values tie.
+
+\subsection*{Input Format}
+\hspace{0.7cm}
+There are several test cases. Each case consists three lines: the first line is the number $n$; the second line contains $n$ integers which are the power values of the enemies; and the third line contains the power values of your soldiers. The value of $n$ is at most 10000.
+The case with $n=0$ terminates the input file and you need not handle this case.
+\subsection*{Output Format}
+\hspace{0.7cm}For each test case, output the maximum number of wins in one line. 
+\subsection*{Sample Input}
+\begin{verbatim}
+4
+1 2 3 4
+2 2 2 2
+3
+1 2 3
+4 3 2
+5
+10 10 10 10 10 
+9 9 9 9 9
+0
+\end{verbatim}
+\subsection*{Sample Output}
+\begin{verbatim}
+1
+3
+0
+\end{verbatim}
+
+
+\end{document}
+

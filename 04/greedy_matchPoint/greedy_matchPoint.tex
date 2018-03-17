@@ -1,0 +1,40 @@
+\documentclass[12pt,psfig,epsf]{article}
+
+\usepackage{epsfig}
+\usepackage{graphicx}
+\begin{document}
+
+\title{\bf{Matching points in the plane} }
+\author{Time limit: 5 seconds}
+\date{}
+\maketitle
+
+\subsection*{Problem Description}
+\hspace{0.7cm}Consider $2n$ points on the XY-plane. Let $S$ be the set of $n$ points on the $X$-axis and $T$ the set of $n$ points on the $Y$-axis. For $s\in S$ and $t\in T$, we define their Euclidean distance $d(s,t)$ is the length of the line segment $\overline{st}$.
+Our goal is to find a 1-to-1 mapping between $S$ and $T$ such that the total Euclidean distance is maximum. That is, we want to find a 1-to-1 function $f:\{1..n\}\rightarrow \{1..n\}$ such that 
+\[ \sum_{i=1}^{n}d(s_i,t_{f(i)}) \]
+is maximized, in which $S=\{s_i|1\leq i\leq n\}$ and $T=\{t_i|1\leq i\leq n\}$.
+\subsection*{Technical Specifications}
+\begin{itemize}
+\item[1.] All coordinates are 16-bits integers.
+\item[2.] $n$ is a positive integer $\leq 1000$.
+\end{itemize}
+\subsection*{Input Format}
+\hspace{0.7cm}The first line of the input file contains an integer
+indicating the number of test cases to follow. Each test case has two lines: the first line for the $X$-coordinates of the points in $S$ and the second line for the $Y$-coordinates of the points in $T$. There is a space between any two integers.
+\subsection*{Output Format}
+\hspace{0.7cm}For each test case, output the integer part of the maximum total distance in a line, i.e., round off the answers to integers. 
+\subsection*{Sample Input}
+\begin{verbatim}
+2
+1 2
+3 4
+141 200
+200 141
+\end{verbatim}
+\subsection*{Sample Output}
+\begin{verbatim}
+7
+489
+\end{verbatim}
+\end{document}
