@@ -3,20 +3,22 @@
 #include<cstring>
 using namespace std;
 struct EMAIL{
-    char domain[100],username[100];
     char email[100];
+    char domain[100],username[100];
 };
-int judge(EMAIL);
-int exists(char [],char);
+/* Functions */
+bool dcmp(EMAIL,EMAIL);
+bool ucmp(EMAIL,EMAIL);
 int duplicate(char [],char);
+int exists(char [],char);
+int judge(EMAIL);
 int nothing(EMAIL);
 int spacebetween(EMAIL);
 void Tlower(char []);
-bool dcmp(EMAIL,EMAIL);
-bool ucmp(EMAIL,EMAIL);
+/* Main */
 int main(){
     int n,act,num=0,i,validnum=0;
-    EMAIL e[100],valide[100];
+    EMAIL e[100],validemail[100];
     freopen("email.in","r",stdin);
     scanf("%d\n",&n);
     while(n--){
@@ -26,7 +28,7 @@ int main(){
         switch(act){
             case 0:
                 cout<<" =>is valid!"<<endl;
-                valide[validnum++]=e[num];
+                validemail[validnum++]=e[num];
                 break;
             case 1:
                 cout<<" =>missing \'@\'!"<<endl;
@@ -63,14 +65,14 @@ int main(){
     }
     puts("<!=============================================");
     if(validnum>0){
-        for(i=0;i<validnum;i++) Tlower(valide[i].email);
+        for(i=0;i<validnum;i++) Tlower(validemail[i].email);
         cout<<"Sort by user name :"<<endl;
-        sort(valide,valide+validnum,ucmp);
-        for(i=0;i<validnum;i++) cout<<valide[i].email<<endl;
+        sort(validemail,validemail+validnum,ucmp);
+        for(i=0;i<validnum;i++) cout<<validemail[i].email<<endl;
         puts("=============================================");
         cout<<"Sort by domain :"<<endl;
-        sort(valide,valide+validnum,dcmp);
-        for(i=0;i<validnum;i++) cout<<valide[i].email<<endl;
+        sort(validemail,validemail+validnum,dcmp);
+        for(i=0;i<validnum;i++) cout<<validemail[i].email<<endl;
     }else cout<<"No email can be sorted"<<endl;
     puts("=============================================!>");
     return 0;
