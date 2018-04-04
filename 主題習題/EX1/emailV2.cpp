@@ -13,8 +13,8 @@ int nothing(char []);
 bool ucmp(EMAIL,EMAIL);
 bool dcmp(EMAIL,EMAIL);
 int main(){
-    int n,act,num=0,i;
-    EMAIL e[100];
+    int n,act,num=0,i,validnum=0;
+    EMAIL e[100],valide[100];
     freopen("email.in","r",stdin);
     scanf("%d\n",&n);
     while(n--){
@@ -24,6 +24,7 @@ int main(){
         switch(act){
             case 0:
                 cout<<"             =>is valid!"<<endl;
+                valide[validnum++]=e[num];
                 break;
             case 1:
                 cout<<"             =>missing \'@\'!"<<endl;
@@ -52,12 +53,7 @@ int main(){
         }
         num++;
     }
-    sort(e,e+num,ucmp);
-    cout<<"Sort by user name :"<<endl;
-    for(i=0;i<num;i++) cout<<e[i].email<<endl;
-    sort(e,e+num,dcmp);
-    cout<<"Sort by domain :"<<endl;
-    for(i=0;i<num;i++) cout<<e[i].email<<endl;
+
     return 0;
 }
 
