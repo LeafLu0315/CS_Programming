@@ -78,6 +78,14 @@ int main(){
     return 0;
 }
 
+bool dcmp(EMAIL a,EMAIL b){
+    return strcmp(a.domain,b.domain)<0;
+}
+
+bool ucmp(EMAIL a,EMAIL b){
+    return strcmp(a.username,b.username)<0;
+}
+
 int judge(EMAIL e){
     /* Not Exists @ or .*/
     if(!exists(e.email,'@')) return 1;
@@ -110,12 +118,6 @@ int judge(EMAIL e){
     return 0;
 }
 
-int exists(char email[],char c){
-    for(int i=0;i<strlen(email);i++)
-        if(email[i] == c) return 1;
-    return 0;
-}
-
 int duplicate(char email[],char c){
     int i,counter=0;
     if(c == '.'){
@@ -132,6 +134,12 @@ int duplicate(char email[],char c){
     return 0;
 }
 
+int exists(char email[],char c){
+    for(int i=0;i<strlen(email);i++)
+        if(email[i] == c) return 1;
+    return 0;
+}
+
 
 int nothing(EMAIL e){
     int dlen=strlen(e.domain)-1,ulen=strlen(e.username)-1;
@@ -143,14 +151,6 @@ int spacebetween(EMAIL e){
     for(int i=0;i<strlen(e.domain)-1;i++) if(e.domain[i] == ' ') return 1;
     for(int i=0;i<strlen(e.username)-1;i++) if(e.username[i] == ' ') return 2;
     return 0;
-}
-
-bool dcmp(EMAIL a,EMAIL b){
-    return strcmp(a.domain,b.domain)<0;
-}
-
-bool ucmp(EMAIL a,EMAIL b){
-    return strcmp(a.username,b.username)<0;
 }
 
 void Tlower(char email[]){
