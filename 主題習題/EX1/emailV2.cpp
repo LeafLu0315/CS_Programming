@@ -9,9 +9,10 @@ struct EMAIL{
 int judge(EMAIL);
 int exists(char [],char);
 int duplicate(char [],char);
-int nothing(char []);
-bool ucmp(EMAIL,EMAIL);
+int nothing(EMAIL);
+int spacebetween(EMAIL);
 bool dcmp(EMAIL,EMAIL);
+bool ucmp(EMAIL,EMAIL);
 int main(){
     int n,act,num=0,i,validnum=0;
     EMAIL e[100],valide[100];
@@ -19,41 +20,52 @@ int main(){
     scanf("%d\n",&n);
     while(n--){
         gets(e[num].email);
-        puts(e[num].email);
+        cout<<e[num].email;
         act=judge(e[num]);
         switch(act){
             case 0:
-                cout<<"             =>is valid!"<<endl;
+                cout<<" =>is valid!"<<endl;
                 valide[validnum++]=e[num];
                 break;
             case 1:
-                cout<<"             =>missing \'@\'!"<<endl;
+                cout<<" =>missing \'@\'!"<<endl;
                 break;
             case 2:
-                cout<<"             =>missing \'.\'!"<<endl;
+                cout<<" =>missing \'.\'!"<<endl;
                 break;
             case 3:
-                cout<<"             =>duplicate \'@\'!"<<endl;
+                cout<<" =>duplicate \'@\'!"<<endl;
                 break;
             case 4:
-                cout<<"             =>dots are nearby!"<<endl;
+                cout<<" =>dots are nearby!"<<endl;
                 break;
             case 5:
-                cout<<"             =>user name contains invalid character!"<<endl;
+                cout<<" =>user name contains invalid character!"<<endl;
                 break;
             case 6:
-                cout<<"             =>domain contains invalid character!"<<endl;
+                cout<<" =>domain contains invalid character!"<<endl;
                 break;
             case 7:
-                cout<<"             =>user name is empty!"<<endl;
+                cout<<" =>user name is empty!"<<endl;
                 break;
             case 8:
-                cout<<"             =>nothing behind the dot!"<<endl;
+                cout<<" =>nothing behind the dot!"<<endl;
+                break;
+            case 9:
+                cout<<" =>there is space between the words!"<<endl;
                 break;
         }
         num++;
     }
-
+    puts("=============================================");
+    cout<<"Sort by user name :"<<endl;
+    sort(valide,valide+validnum,ucmp);
+    for(i=0;i<validnum;i++) cout<<valide[i].email<<endl;
+    puts("=============================================");
+    cout<<"Sort by domain :"<<endl;
+    sort(valide,valide+validnum,dcmp);
+    for(i=0;i<validnum;i++) cout<<valide[i].email<<endl;
+    puts("=============================================");
     return 0;
 }
 
@@ -64,9 +76,9 @@ int judge(EMAIL e){
     /* Duplicate @ or Dots are nearby*/
     if(duplicate(e.email,'@')) return 3;
     if(duplicate(e.email,'.')) return 4;
+    /* Initialize */
     int i,counter=0;
     char *tok=strtok(e.email,"@");
-    /* Initialize */
     memset(e.domain,'\0',sizeof(e.domain));
     memset(e.username,'\0',sizeof(e.username));
     /* Take out Domain and the UserName*/
@@ -75,8 +87,6 @@ int judge(EMAIL e){
         else strcpy(e.username,tok);
         tok=strtok(NULL,"@");
     }
-    /* nothing behind dot*/
-    if(nothing(e.email)) return 8;
     /* Invalid character */
     char valid[]=".@_ ";
     char *s;
@@ -84,6 +94,9 @@ int judge(EMAIL e){
     for(s=e.domain;*s;s++) if(!isalnum(*s) && strchr(valid,*s) == NULL) return 6;
     /* Empty */
     if(!strcmp(e.domain,"")) return 7;
+    /* Nothing behind the dot*/
+    if(nothing(e)) return 8;
+    if(spacebetween(e)) return 9;
     return 0;
 }
 
@@ -109,16 +122,24 @@ int duplicate(char email[],char c){
     return 0;
 }
 
-bool ucmp(EMAIL a,EMAIL b){
-    return strcmp(a.username,b.username)<0;
+
+int nothing(EMAIL e){
+    int dlen=strlen(e.domain)-1,ulen=strlen(e.username)-1;
+    if(e.domain[dlen] == '.' || e.username[ulen] == '.') return 1;
+    return 0;
+}
+
+int spacebetween(EMAIL e){
+    for(int i=0;i<strlen(e.domain)-1;i++) if(e.domain[i] == ' ') return 1;
+    for(int i=0;i<strlen(e.username)-1;i++) if(e.username[i] == ' ') return 2;
+    return 0;
 }
 
 bool dcmp(EMAIL a,EMAIL b){
     return strcmp(a.domain,b.domain)<0;
 }
 
-int nothing(char email[]){
-    for(int i=0;i<strlen(email);i++)
-        if(email[i] == '.' && email[i+1] == '\0') return 1;
-    return 0;
+bool ucmp(EMAIL a,EMAIL b){
+    return strcmp(a.username,b.username)<0;
 }
+
