@@ -140,7 +140,6 @@ int exists(char email[],char c){
     return 0;
 }
 
-
 int nothing(EMAIL e){
     int dlen=strlen(e.domain)-1,ulen=strlen(e.username)-1;
     if(e.domain[dlen] == '.' || e.username[ulen] == '.') return 1;
