@@ -11,6 +11,7 @@ int exists(char [],char);
 int duplicate(char [],char);
 int nothing(EMAIL);
 int spacebetween(EMAIL);
+void Tlower(char []);
 bool dcmp(EMAIL,EMAIL);
 bool ucmp(EMAIL,EMAIL);
 int main(){
@@ -52,20 +53,26 @@ int main(){
                 cout<<" =>nothing behind the dot!"<<endl;
                 break;
             case 9:
-                cout<<" =>there is space between the words!"<<endl;
+                cout<<" =>domain : there is space between the words!"<<endl;
+                break;
+            case 10:
+                cout<<" =>user name : there is space between the words!"<<endl;
                 break;
         }
         num++;
     }
-    puts("=============================================");
-    cout<<"Sort by user name :"<<endl;
-    sort(valide,valide+validnum,ucmp);
-    for(i=0;i<validnum;i++) cout<<valide[i].email<<endl;
-    puts("=============================================");
-    cout<<"Sort by domain :"<<endl;
-    sort(valide,valide+validnum,dcmp);
-    for(i=0;i<validnum;i++) cout<<valide[i].email<<endl;
-    puts("=============================================");
+    puts("<!=============================================");
+    if(validnum>0){
+        for(i=0;i<validnum;i++) Tlower(valide[i].email);
+        cout<<"Sort by user name :"<<endl;
+        sort(valide,valide+validnum,ucmp);
+        for(i=0;i<validnum;i++) cout<<valide[i].email<<endl;
+        puts("=============================================");
+        cout<<"Sort by domain :"<<endl;
+        sort(valide,valide+validnum,dcmp);
+        for(i=0;i<validnum;i++) cout<<valide[i].email<<endl;
+    }else cout<<"No email can be sorted"<<endl;
+    puts("=============================================!>");
     return 0;
 }
 
@@ -96,7 +103,8 @@ int judge(EMAIL e){
     if(!strcmp(e.domain,"")) return 7;
     /* Nothing behind the dot*/
     if(nothing(e)) return 8;
-    if(spacebetween(e)) return 9;
+    if(spacebetween(e) == 1) return 9;
+    if(spacebetween(e) == 2) return 10;
     return 0;
 }
 
@@ -143,3 +151,8 @@ bool ucmp(EMAIL a,EMAIL b){
     return strcmp(a.username,b.username)<0;
 }
 
+void Tlower(char email[]){
+    for(int i=0;i<strlen(email);i++)
+        if(email[i] >= 'A' && email[i] <= 'Z') email[i]=email[i]-'A'+'a';
+    return ;
+}
