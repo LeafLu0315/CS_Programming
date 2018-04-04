@@ -113,6 +113,7 @@ int judge(EMAIL e){
     if(!strcmp(e.domain,"")) return 7;
     /* Nothing behind the dot*/
     if(nothing(e)) return 8;
+    /* There are space between*/
     if(spacebetween(e) == 1) return 9;
     if(spacebetween(e) == 2) return 10;
     return 0;
