@@ -20,7 +20,6 @@ void Tlower(char []);
 int main(){
     int n,act,num,i,validnum,counter;
     EMAIL e[100],validemail[100];
-    freopen("sort.in","r",stdin);
     while(scanf("%d\n",&n),n){
         num=validnum=0;
         while(n--){
