@@ -20,6 +20,7 @@ void Tlower(char []);
 int main(){
     int n,act,num,i,validnum,counter;
     EMAIL e[100],validemail[100];
+    freopen("sort.in","r",stdin);
     while(scanf("%d\n",&n),n){
         num=validnum=0;
         while(n--){
@@ -64,7 +65,7 @@ int main(){
             }
             num++;
         }
-        puts("<!=============================================");
+        puts("<!------------------------------------------");
         if(validnum>0){
             char *tok;
             for(i=0;i<validnum;i++){
@@ -76,23 +77,26 @@ int main(){
                     tok=strtok(NULL,"@");
                     counter++;
                 }
+                /* String connections*/
                 strcat(validemail[i].email,"@");
                 strcat(validemail[i].email,validemail[i].domain);
+                /* To lower case*/
                 Tlower(validemail[i].email);
             }
+            /* Sorting */
             cout<<"Sort by user name :"<<endl;
             sort(validemail,validemail+validnum,ucmp);
             for(i=0;i<validnum;i++) cout<<validemail[i].username<<"@"<<validemail[i].domain<<endl;
-            puts("=============================================");
+            puts("--------------------------------------------");
             cout<<"Sort by domain :"<<endl;
             sort(validemail,validemail+validnum,dcmp);
             for(i=0;i<validnum;i++) cout<<validemail[i].username<<"@"<<validemail[i].domain<<endl;
-            puts("=============================================");
+            puts("--------------------------------------------");
             cout<<"Sort by user name and domain :"<<endl;
             sort(validemail,validemail+validnum,udcmp);
             for(i=0;i<validnum;i++) cout<<validemail[i].username<<"@"<<validemail[i].domain<<endl;
         }else cout<<"No email can be sorted"<<endl;
-        puts("=============================================!>\n");
+        puts("--------------------------------------------!>\n");
     }
     return 0;
 }
