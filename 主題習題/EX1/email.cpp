@@ -11,11 +11,11 @@ void TLow(char []);
 int main(){
     int n,act;
     char email[100];
-    freopen("false.in","r",stdin);
     cin>>n;
     while(n--){
         gets(email);
         act=judge(email);
+        cout<<email;
         if(!act) cout<<"OK!"<<endl;
         else{
             cout<<"INVAILD EMAIL :";
