@@ -1,0 +1,54 @@
+\documentclass[12pt,titlepage]{article}
+\topmargin 0pt
+\advance \topmargin by -\headheight
+\advance \topmargin by -\headsep
+
+\textheight 9.4in
+
+\oddsidemargin 0pt
+\evensidemargin \oddsidemargin
+\marginparwidth 0.5in
+
+\textwidth 6.5in
+\begin{document}
+\section*{\centering Spaceship}
+%PA91A6
+You are driving a spaceship and your ship will pass through $n$ gates. For each gate, there are two passing temperatures $k_1$ and $k_2$, and you have to exactly change the temperature of your ship to either $k_1$ or $k_2$. 
+However, changing the temperature consumes energy proportional to the difference of the temperatures and you need to find the minimum energy consumption to pass all the gates. At the beginning, the temperature of your ship is 1000, and all the passing temperatures of all gates are between -10000 and 10000.
+For example, there are three gates and the choices are \\
+	1200 -10\\
+	-1000 -2000\\
+	10 -1950\\
+To pass the first gate, you may choose 1200 or -10, and -1000 or -2000 for the second gate. If your choice is 1200 for the first, -1000 for the second, and 10 for the third, the total consumed energy is 
+\[ |1200-1000|+|-1000-1200|+|10-(-1000)|=3410  \]
+But if you choose -10 for the first, -1000 for the second, and -1950 for the third, the energy will be 2950, better than the previous choice. In fact, it is the minimum energy among all possible choice.
+
+\vspace*{.1in}
+\noindent
+{\large \bfseries Input}:
+The input consists of several test cases. The first line of each test case is an integer $n\leq 1000$, indicating the number of gates. Followed this line are $n$ lines and each contains the two passing temperatures $k_1$ and $k_2$, $-10000\leq k_1,k_2\leq 10000$. The case with $n=0$ ends the input.
+
+\vspace*{.1in}
+\noindent
+{\large \bfseries Output}:
+Output the minimum energy of each case in one line. \\
+
+{\flushleft \bf Sample Input:}\\
+3\\
+2000 -10\\
+-1000 -2000\\
+10 -1950\\
+5\\
+-10000 10000\\
+9900 9800\\
+-2000 -4000\\
+100 6900\\
+-2000 4500\\
+0\\
+
+{\flushleft \bf Output of the sample input:}\\ 
+2950\\
+25200\\
+
+\end{document}
+
