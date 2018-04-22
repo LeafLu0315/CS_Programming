@@ -21,7 +21,7 @@ void sol(){
         if(mtime<t[i]) mtime=t[i];
     }
     if(dline<mtime){
-        printf("-1\n");
+        printf("%d\n",-1);
         return ;
     }
     int down=sum/dline,up=job,r,res;
@@ -32,6 +32,7 @@ void sol(){
         else down=r+1;
     }
     printf("%d\n",up);
+    free(t);
     return ;
 }
 
