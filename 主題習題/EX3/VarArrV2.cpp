@@ -20,7 +20,7 @@ int main(){
         /* when the data quantity is equal to the malloc size then give double size */
         if(counter == info_size){
             info_size *= 2;
-            printf("=======================================>stack/queue is full, system auto allocated double size %d\n",info_size);
+            printf("=======================================>queue/stack full, allocate double size %d\n",info_size);
             info = (INFO*) realloc(info,sizeof(INFO)*info_size);    //reallocate the double size
         }
         getInformation(str,info,counter++);   //get the information
@@ -78,6 +78,6 @@ void getSex(char str[], INFO *info, int counter,int endpos){
         }
         else strcpy(info[counter].gender,"UNDEFINED");
     }
-    printf("Gender : %s\n",info[counter].gender);
+    printf("Sex : %s\n",info[counter].gender);
     return;
 }
