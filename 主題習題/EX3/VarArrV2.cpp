@@ -56,7 +56,7 @@ int getAge(char str[], INFO *info, int counter, int endpos){
     for(i=endpos,j=0;i<strlen(str);i++,j++){
         if(str[i]>='0' && str[i] <= '9') age+=(str[i]-'0'); //get the age
         else if(age != 0) break;
-        if(j > 1) age*=10;
+        if(j > 0) age*=10;
     }
     info[counter].age = age/10;
     printf("Age : %d ",info[counter].age);
