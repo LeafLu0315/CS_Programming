@@ -17,14 +17,13 @@ int main(){
     char str[100];
     INFO *info = (INFO*) malloc(sizeof(INFO)*info_size);
     while(gets(str)!=NULL){
-            /* when the data quantity is equal to the malloc size then give double size */
+        /* when the data quantity is equal to the malloc size then give double size */
         if(counter == info_size){
             info_size *= 2;
             printf("=======================================>stack/queue is full, system auto allocated double size %d\n",info_size);
             info = (INFO*) realloc(info,sizeof(INFO)*info_size);    //reallocate the double size
         }
-        getInformation(str,info,counter);   //get the information
-        counter++;
+        getInformation(str,info,counter++);   //get the information
     }
     return 0;
 }
@@ -53,12 +52,14 @@ int getName(char str[],INFO *info,int counter){
 
 int getAge(char str[], INFO *info, int counter, int endpos){
     int age=0,i,j;
-    for(i=endpos,j=0;i<strlen(str);i++,j++){
-        if(str[i]>='0' && str[i] <= '9') age+=(str[i]-'0'); //get the age
+    for(i=endpos,j=0;i<strlen(str);i++){
+        if(str[i]>='0' && str[i] <= '9'){
+            if(j++ > 0) age *= 10;
+            age+=(str[i]-'0'); //get the age
+        }
         else if(age != 0) break;
-        if(j > 0) age*=10;
     }
-    info[counter].age = age/10;
+    info[counter].age = age;
     printf("Age : %d ",info[counter].age);
     return i;   //return the stopping position
 }
