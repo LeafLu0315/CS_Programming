@@ -25,6 +25,7 @@ int main(){
         }
         getInformation(str,info,counter++);   //get the information
     }
+    free(info);
     return 0;
 }
 /* Get all information */
@@ -80,4 +81,3 @@ void getSex(char str[], INFO *info, int counter,int endpos){
     printf("Gender : %s\n",info[counter].gender);
     return;
 }
-
