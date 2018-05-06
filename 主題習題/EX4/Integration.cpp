@@ -1,0 +1,128 @@
+#include<cstdio>
+#include<cstring>
+#include<cmath>
+#include<cctype>
+double integration(double(double),double,double,double);
+double poly(double);
+double mcalc(int,double,double,double);
+void polyproc(char []);
+double power(double,int);
+const int cosize=10;
+int coefficient[cosize],cocounter=0;
+int main(int argv, char* argc[]){
+    const int msize=13,polysize=50;
+    char pol[polysize];
+    const char math[msize][6]={"sin","cos","tan","asin","acos","atan","atan2","cosh","sinh","tanh","acosh","asinh","atanh"};
+    double a,b,t,y=0;
+    bool isMath;
+    int i;
+    if(argv > 0){
+        while(scanf("%s%lf%lf%lf",pol,&a,&b,&t)!=EOF){
+            isMath = false;
+            for(i=0;i<msize;i++)
+                if(!strcmp(math[i],pol)){
+                    isMath = true;
+                    break;
+                }
+            if(isMath) y = mcalc(i,a,b,t);
+            else{
+                polyproc(pol);
+                y = integration(poly,a,b,t);
+            }
+            printf("%f\n",y);
+        }
+    }
+    return 0;
+}
+
+double mcalc(int pos,double a,double b,double t){
+    double y = 0;
+    switch(pos){
+        case 0:
+            y = integration(sin,a,b,t);
+            break;
+        case 1:
+            y = integration(cos,a,b,t);
+            break;
+        case 2:
+            y = integration(tan,a,b,t);
+            break;
+        case 3:
+            y = integration(asin,a,b,t);
+            break;
+        case 4:
+            y = integration(acos,a,b,t);
+            break;
+        case 5:
+            y = integration(atan,a,b,t);
+            break;
+        case 7:
+            y = integration(cosh,a,b,t);
+            break;
+        case 8:
+            y = integration(sinh,a,b,t);
+            break;
+        case 9:
+            y = integration(tanh,a,b,t);
+            break;
+        case 10:
+            y = integration(acosh,a,b,t);
+            break;
+        case 11:
+            y = integration(asinh,a,b,t);
+            break;
+        case 12:
+            y = integration(atanh,a,b,t);
+            break;
+        default:
+            break;
+    }
+    return y;
+}
+
+double integration(double (*f)(double), double a, double b,double t){
+    double sum=0;
+    for(double i=a;i<=b;i+=t) sum+=f(i);
+    return sum*t;
+}
+
+void polyproc(char pol[]){
+    const int tmpsize=5;
+    int counter=0,num=0;
+    char tmp[tmpsize]={'\0'};
+    bool execution_once;
+    cocounter = 0;
+    for(int i=0;i<cosize;i++) coefficient[i] = 0;
+    if(isdigit(pol[0])) tmp[counter++] = pol[0];
+    for(int i=1;i<=strlen(pol);i++){
+        execution_once = false;
+        if(isdigit(pol[i]) && pol[i-1] != '^') tmp[counter++] = pol[i];
+        else if(pol[i] == '+' || pol[i] == '-' || pol[i] == '\0'){
+            for(int j = 0 ;j<counter;j++) {
+                if(execution_once) num*=10;
+                num += tmp[j]-'0';
+                execution_once = true;
+            }
+            coefficient[cocounter++] = num;
+            counter = num = 0;
+        }
+    }
+    for(int i=0;i<cocounter;i++) if(coefficient[i] == 0) coefficient[i] = 1;
+    return ;
+}
+
+double poly(double x){
+    double sum = 0;
+    for(int i=0;i<cocounter;i++) sum+=coefficient[i]*power(x,(cocounter-i-1));
+    return sum;
+}
+
+double power(double x, int y){
+    double sum = 1,xi=x;
+    while(y){
+        if(y&1) sum*=xi;
+        xi*=xi;
+        y>>=1;
+    }
+    return sum;
+}
