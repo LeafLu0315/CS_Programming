@@ -114,7 +114,7 @@ void polyproc(char pol[]){
     int counter=0,num=0;
     int highest[tmpsize]={0};
     char tmp[tmpsize]={'\0'};
-    bool execution_once,visits[tmpsize],isNegetive;
+    bool execution_once,visits[tmpsize];
     for(int i=0;i<tmpsize;i++) visits[i] = false;
     for(int i=0;i<cosize;i++) coefficient[i] = 0;   //initialize
     if(isdigit(pol[0])) tmp[counter++] = pol[0];    //is digit or not
@@ -123,13 +123,10 @@ void polyproc(char pol[]){
         else if(isdigit(pol[i]) && pol[i+1] == 'x') highest[1]++;   //_x
     }
     if(isdigit(pol[strlen(pol)-1])) highest[0]++;   //normal number
-    if(pol[0] == '-') isNegetive = true;
     if(isdigit(pol[0]) && pol[1] == 'x' && pol[2] == '^' && isdigit(pol[3])) coefficient[pol[3]-'0'] = pol[0]-'0';
     else if(isdigit(pol[0]) && pol[1] == 'x') coefficient[1] = pol[0]-'0';
     for(int i=1;i<=strlen(pol);i++){
         execution_once = false;
-        if(i > 1) isNegetive = false;
-        if(isdigit(pol[i]) && pol[i-1] == '-') isNegetive = true;
         if(isdigit(pol[i]) && pol[i+1] == 'x'){
             if(pol[i+2] == '^') coefficient[pol[i+3]-'0'] = pol[i]-'0';
             else coefficient[1] = pol[i]-'0';
@@ -143,7 +140,6 @@ void polyproc(char pol[]){
             }
             for(int i=tmpsize-1;i>=0;i--) if(highest[i] && !visits[i]){
                 coefficient[i] = (num == 0) ? 1:num;
-                if(isNegetive) coefficient[i] = -coefficient[i];
                 visits[i] = true;
                 break;
             }
@@ -161,6 +157,12 @@ void polyproc(char pol[]){
     for(int i=0;i<strlen(pol);i++) if(pol[i] == 'x' && pol[i+1]!='^'){
         if( (pol[i+1] == '+' || pol[i+1] == '-') && (pol[i-1] == '-' || pol[i-1] == '+')) coefficient[1]=1;
         else if(isdigit(pol[i-1])) coefficient[1] = pol[i-1]-'0';
+    }
+    for(int i=0;i<strlen(pol);i++){
+        if(pol[i] == '-' && isdigit(pol[i+4]) && pol[i+2] == 'x') coefficient[pol[i+4]-'0']*=-1;    //x^n
+        else if(pol[i] == '-' && isdigit(pol[i+3]) && pol[i+1] == 'x') coefficient[pol[i+3]-'0']*=-1;
+        else if(pol[i] == '-' && isdigit(pol[i+1]) && pol[i+2] == 'x') coefficient[1]*=-1;
+        else if(pol[i] == '-' && isdigit(pol[i+1]) && pol[i+2] == '\0') coefficient[0] *= -1;
     }
     return ;
 }
