@@ -119,10 +119,10 @@ void polyproc(char pol[]){
     for(int i=0;i<cosize;i++) coefficient[i] = 0;   //initialize
     if(isdigit(pol[0])) tmp[counter++] = pol[0];    //is digit or not
     for(int i=0;i<strlen(pol)-1;i++){
-        if(pol[i] == '^' && isdigit(pol[i+1])) highest[pol[i+1]-'0']++;
-        else if(isdigit(pol[i]) && pol[i+1] == 'x') highest[1]++;
+        if(pol[i] == '^' && isdigit(pol[i+1])) highest[pol[i+1]-'0']++; //Find the highest coefficient
+        else if(isdigit(pol[i]) && pol[i+1] == 'x') highest[1]++;   //_x
     }
-    if(isdigit(pol[strlen(pol)-1])) highest[0]++;
+    if(isdigit(pol[strlen(pol)-1])) highest[0]++;   //normal number
     for(int i=1;i<=strlen(pol);i++){
         execution_once = false;
         if(isdigit(pol[i]) && pol[i-1] != '^') tmp[counter++] = pol[i]; //get the digit into the array
