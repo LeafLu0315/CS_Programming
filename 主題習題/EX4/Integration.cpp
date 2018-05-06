@@ -104,8 +104,8 @@ double mcalc(int pos,double a,double b,double t){
 /* Calculate the sum */
 double integration(double (*f)(double), double a, double b,double t){
     double sum=0;
-    if(a<b) for(double i=a;i<=b;i+=t)sum +=f(i);
-    else for(double i=b;i<=a;i+=t) sum-=f(i);
+    if(a<b) for(double i=a;i<=b;i+=t) sum += f(i);
+    else for(double i=b;i<=a;i+=t) sum -= f(i);
     return sum*t;
 }
 /* Processing the polynomial */
@@ -140,6 +140,7 @@ void polyproc(char pol[]){
             counter = num = 0;
         }
     }
+    for(int i=0;i<5;i++) printf("%d ",coefficient[i]);
     return ;
 }
 /* calculate the f(x)*/
