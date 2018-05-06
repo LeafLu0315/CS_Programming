@@ -9,7 +9,7 @@ double mcalc(int,double,double,double);
 void polyproc(char []);
 double power(double,int);
 const int cosize=10;
-int coefficient[cosize],cocounter=0;
+int coefficient[cosize];
 
 int main(int argv, char* argc[]){
     /* give the maximum size */
@@ -112,11 +112,17 @@ double integration(double (*f)(double), double a, double b,double t){
 void polyproc(char pol[]){
     const int tmpsize=5;
     int counter=0,num=0;
+    int highest[tmpsize]={0};
     char tmp[tmpsize]={'\0'};
-    bool execution_once;
-    cocounter = 0;
+    bool execution_once,visits[tmpsize];
+    for(int i=0;i<tmpsize;i++) visits[i] = false;
     for(int i=0;i<cosize;i++) coefficient[i] = 0;   //initialize
     if(isdigit(pol[0])) tmp[counter++] = pol[0];    //is digit or not
+    for(int i=0;i<strlen(pol)-1;i++){
+        if(pol[i] == '^' && isdigit(pol[i+1])) highest[pol[i+1]-'0']++;
+        else if(isdigit(pol[i]) && pol[i+1] == 'x') highest[1]++;
+    }
+    if(isdigit(pol[strlen(pol)-1])) highest[0]++;
     for(int i=1;i<=strlen(pol);i++){
         execution_once = false;
         if(isdigit(pol[i]) && pol[i-1] != '^') tmp[counter++] = pol[i]; //get the digit into the array
@@ -126,17 +132,20 @@ void polyproc(char pol[]){
                 num += tmp[j]-'0';
                 execution_once = true;
             }
-            coefficient[cocounter++] = num;
+            for(int i=tmpsize-1;i>=0;i--) if(highest[i] && !visits[i]){
+                coefficient[i] = (num == 0) ? 1:num;
+                visits[i] = true;
+                break;
+            }
             counter = num = 0;
         }
     }
-    for(int i=0;i<cocounter;i++) if(coefficient[i] == 0) coefficient[i] = 1;
     return ;
 }
 /* calculate the f(x)*/
 double poly(double x){
     double sum = 0;
-    for(int i=0;i<cocounter;i++) sum+=coefficient[i]*power(x,(cocounter-i-1));
+    for(int i=0;i<5;i++) sum+=coefficient[i]*power(x,i);
     return sum;
 }
 /* power function*/
