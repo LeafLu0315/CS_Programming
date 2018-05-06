@@ -124,7 +124,7 @@ void polyproc(char pol[]){
     }
     if(isdigit(pol[strlen(pol)-1])) highest[0]++;   //normal number
     if(pol[0] == '-') isNegetive = true;
-    if(isdigit(pol[0]) && pol[1] == 'x' && isdigit(pol[3])) coefficient[pol[3]-'0'] = pol[0]-'0';
+    if(isdigit(pol[0]) && pol[1] == 'x' && pol[2] == '^' && isdigit(pol[3])) coefficient[pol[3]-'0'] = pol[0]-'0';
     else if(isdigit(pol[0]) && pol[1] == 'x') coefficient[1] = pol[0]-'0';
     for(int i=1;i<=strlen(pol);i++){
         execution_once = false;
@@ -154,8 +154,14 @@ void polyproc(char pol[]){
     if(strlen(pol) == 1){
         if(pol[0] == 'x') coefficient[1]=1;
         else coefficient[0]=pol[0]-'0';
+    }else if(strlen(pol) == 3 && pol[0]=='x' && pol[1] == '+' || pol[1] == '-' && isdigit(pol[2])){
+        coefficient[0] = pol[2] - '0';
+        coefficient[1] = 1;
     }
-    for(int i=0;i<5;i++) printf("%d ",coefficient[i]);
+    for(int i=0;i<strlen(pol);i++) if(pol[i] == 'x' && pol[i+1]!='^'){
+        if( (pol[i+1] == '+' || pol[i+1] == '-') && (pol[i-1] == '-' || pol[i-1] == '+')) coefficient[1]=1;
+        else if(isdigit(pol[i-1])) coefficient[1] = pol[i-1]-'0';
+    }
     return ;
 }
 /* calculate the f(x)*/
