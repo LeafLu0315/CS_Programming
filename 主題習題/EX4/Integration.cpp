@@ -114,7 +114,7 @@ void polyproc(char pol[]){
     int counter=0,num=0;
     int highest[tmpsize]={0};
     char tmp[tmpsize]={'\0'};
-    bool execution_once,visits[tmpsize];
+    bool execution_once,visits[tmpsize],isNegetive;
     for(int i=0;i<tmpsize;i++) visits[i] = false;
     for(int i=0;i<cosize;i++) coefficient[i] = 0;   //initialize
     if(isdigit(pol[0])) tmp[counter++] = pol[0];    //is digit or not
@@ -123,8 +123,17 @@ void polyproc(char pol[]){
         else if(isdigit(pol[i]) && pol[i+1] == 'x') highest[1]++;   //_x
     }
     if(isdigit(pol[strlen(pol)-1])) highest[0]++;   //normal number
+    if(pol[0] == '-') isNegetive = true;
+    if(isdigit(pol[0]) && pol[1] == 'x' && isdigit(pol[3])) coefficient[pol[3]-'0'] = pol[0]-'0';
+    else if(isdigit(pol[0]) && pol[1] == 'x') coefficient[1] = pol[0]-'0';
     for(int i=1;i<=strlen(pol);i++){
         execution_once = false;
+        if(i > 1) isNegetive = false;
+        if(isdigit(pol[i]) && pol[i-1] == '-') isNegetive = true;
+        if(isdigit(pol[i]) && pol[i+1] == 'x'){
+            if(pol[i+2] == '^') coefficient[pol[i+3]-'0'] = pol[i]-'0';
+            else coefficient[1] = pol[i]-'0';
+        }
         if(isdigit(pol[i]) && pol[i-1] != '^') tmp[counter++] = pol[i]; //get the digit into the array
         else if(pol[i] == '+' || pol[i] == '-' || pol[i] == '\0'){
             for(int j = 0 ;j<counter;j++) {
@@ -134,11 +143,17 @@ void polyproc(char pol[]){
             }
             for(int i=tmpsize-1;i>=0;i--) if(highest[i] && !visits[i]){
                 coefficient[i] = (num == 0) ? 1:num;
+                if(isNegetive) coefficient[i] = -coefficient[i];
                 visits[i] = true;
                 break;
             }
             counter = num = 0;
         }
+    }
+    /* If the line is a normal number or one x */
+    if(strlen(pol) == 1){
+        if(pol[0] == 'x') coefficient[1]=1;
+        else coefficient[0]=pol[0]-'0';
     }
     for(int i=0;i<5;i++) printf("%d ",coefficient[i]);
     return ;
