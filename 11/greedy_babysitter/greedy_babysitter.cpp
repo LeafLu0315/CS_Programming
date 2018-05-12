@@ -10,11 +10,11 @@ struct TIME{
 };
 bool cmp(TIME a,TIME b);
 void sol();
+char str[STRSZE];
 int main(void){
     int n;
-    char white[STRSZE];
     scanf("%d",&n);
-    getchar(); gets(white);
+    getchar(); gets(str);
     while(n--) sol();
     return 0;
 }
@@ -25,21 +25,19 @@ bool cmp(TIME a,TIME b){
 
 void sol(){
     TIME t[N];
-    int n,sze=0,a,b,ans,right;
-    char str[STRSZE];
+    int n=0,sze=0,ans=0,right=-1;
     gets(str);
     while(str[0]!='\0'){
+        int a,b;
         sscanf(str,"%d %d",&a,&b);
         t[sze].left=min(a,b);
         t[sze++].right=max(a,b);
         if(gets(str)==NULL) break;
     }
     sort(t,t+sze,cmp);
-    ans = a = 0;
-    right = -100;
-    while(a<200){
-        for(int i=0;t[i].left<=a;i++) if(t[i].right>right) right = t[i].right;
-        a = right + 1;
+    while(n<200){
+        for(int i=0;t[i].left<=n;i++) if(t[i].right>right) right = t[i].right;
+        n = right + 1;
         ans++;
     }
     printf("%d\n",ans);
