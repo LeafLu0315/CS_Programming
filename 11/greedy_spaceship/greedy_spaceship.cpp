@@ -4,7 +4,7 @@
 void sol(int);
 int ABS(int);
 int mini(int,int);
-int main(){
+int main(void){
     int n;
     while(scanf("%d",&n),n) sol(n);
     return 0;
