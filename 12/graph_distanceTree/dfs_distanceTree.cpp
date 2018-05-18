@@ -18,7 +18,10 @@ int main(void){
 void sol(){
     queue<int> q;
     scanf("%d",&nodes);
-    for(int i=1;i<=nodes;i++) child[i].clear();
+    for(int i=1;i<=nodes;i++){
+        child[i].clear();
+        node[i]=1;
+    }
     for(int i=2;i<=nodes;i++) scanf("%d",&parent[i]);
     for(int i=2;i<=nodes;i++){
         scanf("%d",&edge[i]);
@@ -30,7 +33,6 @@ void sol(){
 }
 
 void dfs(int n){
-    node[n]=1;
     for(int a : child[n]){
         dfs(a);
         node[n]+=node[a];
