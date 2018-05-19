@@ -28,7 +28,7 @@ void sol(int n){
         notpick[parent[f]] += max(pick[f],notpick[f]);
         pick[parent[f]] += notpick[f];
         degree[parent[f]]--;
-        if(degree[parent[f]]==0 && parent[f]!=1) q.push(parent[f]);
+        if(!degree[parent[f]]) q.push(parent[f]);
     }
     printf("%d\n",max(pick[1],notpick[1]));
 }
