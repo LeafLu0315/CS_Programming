@@ -14,7 +14,7 @@ int main(){
 }
 
 bool cmp(LINE p,LINE q){
-    return p.left<q.left;
+    return p.left < q.left;
 }
 
 void sol(){
