@@ -26,10 +26,10 @@ void sol(){
     }
     int down=sum/dline,up=job,r,res;
     while(up>down){
-        r=(up+down)/2;
-        res=calc(job,r,t);
-        if(res<=dline) up=r;
-        else down=r+1;
+        r = (up+down)/2;
+        res = calc(job,r,t);
+        if(res <= dline) up=r;
+        else down = r+1;
     }
     printf("%d\n",up);
     free(t);

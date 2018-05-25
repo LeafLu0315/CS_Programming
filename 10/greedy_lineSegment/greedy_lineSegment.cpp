@@ -19,7 +19,7 @@ bool cmp(LINE p,LINE q){
 
 void sol(){
     char str[N];
-    int n,x,y,ans=0;
+    int n,x,y,ans = 0;
     LINE l[N];
     scanf("%d\n",&n);
     for(int i=0;i<n;i++){
