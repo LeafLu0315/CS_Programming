@@ -17,7 +17,7 @@ int main(void){
             F[j]=tmp;
             if(j==cnt) cnt++;
         }
-        printf("%d\n",cnt-1);
+        printf("%d\n",cnt - 1);
     }
     return 0;
 }
