@@ -32,7 +32,7 @@ void sol(){
     bfs(far,dis,n,v);
     for(int i=0;i<n;i++) ans=max(ans,dis[i]);
     printf("%d",ans);
-    delete [] dis,v;
+    delete dis,v;
 }
 
 void bfs(int a,int *dis,int n,vector<int> *v){
