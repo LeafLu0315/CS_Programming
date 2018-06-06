@@ -2,7 +2,7 @@
 #include<cstdlib>
 #include<ctime>
 #include<memory.h>
-#define N 10000000  //array size
+#define N 10000  //array size
 #define GENERATE_RANGE 123456789   //random number range
 /* functions */
 int random(int*,int,int);
@@ -18,8 +18,8 @@ int main(void){
     generateArr(arr,N);
     quick(arr,0,N-1);
 //    printArr(arr,N);
-    printf("%s",error_detect(arr,N) ? "OK":"ERROR");
-    delete arr;
+//    printf("%s",error_detect(arr,N) ? "OK":"ERROR");
+    delete[] arr;
     return 0;
 }
 /* generate array */
