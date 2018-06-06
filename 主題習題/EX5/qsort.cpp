@@ -2,8 +2,8 @@
 #include<cstdlib>
 #include<ctime>
 #include<memory.h>
-#define N 1000
-#define GENERATE_RANGE 810000
+#define N 1000  //array size
+#define GENERATE_RANGE 810000   //random number range
 /* functions */
 int random(int*,int,int);
 void quick(int*,int,int);
@@ -35,17 +35,12 @@ void quick(int *arr,int start,int ending){
     quick(arr,pivot+1,ending);
 }
 /* Choose random pivot */
-int random(int *arr, int start, int ending){
+int random(int *arr,int start,int ending){
     int pivotIndex = start+rand()%(ending-start+1);
     int pivot = arr[pivotIndex];
     int left = start - 1;
     myswap(&arr[pivotIndex], &arr[ending]);
-    for(int i=start;i<ending;i++){
-        if(arr[i] < pivot){
-            left++;
-            myswap(&arr[left],&arr[i]);
-        }
-    }
+    for(int i=start;i<ending;i++) if(arr[i] < pivot) myswap(&arr[++left],&arr[i]);
     myswap(&arr[left+1],&arr[ending]);
     return left+1;  //random pivot
 }
@@ -58,7 +53,7 @@ void myswap(int *a, int* b){
     return;
 }
 /* Print array */
-void printArr(int *arr, int n){
+void printArr(int *arr,int n){
     for(int i=0; i<n-1; i++)
         printf("%d ",arr[i]);
     printf("%d\n",arr[n-1]);
