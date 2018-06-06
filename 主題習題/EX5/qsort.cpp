@@ -3,9 +3,9 @@
 #include<ctime>
 #include<memory.h>
 #define N 1000
-#define GENERATE_RANGE 10000
+#define GENERATE_RANGE 810000
 /* functions */
-int random(int *,int,int);
+int random(int*,int,int);
 void quick(int*,int,int);
 void myswap(int*,int*);
 void printArr(int*,int);
@@ -25,7 +25,7 @@ int main(void){
 }
 /* generate array */
 void generateArr(int *arr,int n){
-    for(int i=0;i<n;i++) arr[i] = rand()%GENERATE_RANGE;
+    for(int i=0;i<n;i++) arr[i] = (rand()*rand())%GENERATE_RANGE;
 }
 /* quick sort */
 void quick(int *arr,int start,int ending){
