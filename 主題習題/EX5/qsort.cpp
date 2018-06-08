@@ -2,23 +2,23 @@
 #include<cstdlib>
 #include<ctime>
 #include<memory.h>
-#define N 10000  //array size
-#define GENERATE_RANGE 123456789   //random number range
+#define N 1000  //array size
+#define GENERATE_RANGE 123456   //random number range
 /* functions */
 int random(int*,int,int);
-void quick(int*,int,int);
+int cmp(void*,void*);
+void quick(int*,int,int,int (*cmp)(void*,void*));
 void myswap(int*,int*);
 void printArr(int*,int);
 void generateArr(int*,int);
-bool error_detect(int*,int);
+void reverseArr(int*,int);
 int main(void){
     srand(time(NULL));
 //    freopen("o.txt","w",stdout);
     int *arr = new int[N];
     generateArr(arr,N);
-    quick(arr,0,N-1);
-//    printArr(arr,N);
-//    printf("%s",error_detect(arr,N) ? "OK":"ERROR");
+    quick(arr,0,N-1,cmp);
+    printArr(arr,N);
     delete[] arr;
     return 0;
 }
@@ -26,12 +26,16 @@ int main(void){
 void generateArr(int *arr,int n){
     for(int i=0;i<n;i++) arr[i] = (rand()*rand())%GENERATE_RANGE;
 }
+/* compares */
+int cmp(void *a,void *b){
+    return *(int*)a-*(int*)b;
+}
 /* quick sort */
-void quick(int *arr,int start,int ending){
+void quick(int *arr,int start,int ending,int (*cmp)(void*,void*)){
     if(start>=ending) return;
     int pivot = random(arr,start,ending);
-    quick(arr,start,pivot-1);
-    quick(arr,pivot+1,ending);
+    quick(arr,start,pivot-1,cmp);
+    quick(arr,pivot+1,ending,cmp);
 }
 /* Choose random pivot */
 int random(int *arr,int start,int ending){
@@ -44,7 +48,7 @@ int random(int *arr,int start,int ending){
     return left+1;  //random pivot
 }
 /* Swapping a and b */
-void myswap(int *a, int* b){
+void myswap(int *a, int *b){
     if(a == b) return;
     int t=*a;
     *a=*b;
@@ -55,12 +59,14 @@ void myswap(int *a, int* b){
 void printArr(int *arr,int n){
     for(int i=0; i<n-1; i++)
         printf("%d ",arr[i]);
-    printf("%d",arr[n-1]);
+    printf("%d\n",arr[n-1]);
     return;
 }
-/* Error detection */
-bool error_detect(int *arr,int n){
-    bool ed = false;
-    for(int i=0;i<n-1;i++) if(arr[i]>arr[i-1]){ ed=true; break;}
-    return ed;
+/* Reverse array */
+void reverseArr(int *arr, int n){
+    for(int i=0;i<n/2;i++){
+        int t = arr[i];
+        arr[i] = arr[n-i-1];
+        arr[n-i-1] = t;
+    }
 }
