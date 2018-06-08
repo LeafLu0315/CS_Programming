@@ -3,22 +3,23 @@
 #include<ctime>
 #include<memory.h>
 #define N 1000  //array size
-#define GENERATE_RANGE 123456   //random number range
+#define GENERATE_RANGE 100000000   //random number range
 /* functions */
 int random(int*,int,int);
 int cmp(void*,void*);
+int cmp2(int,int);
 void quick(int*,int,int,int (*cmp)(void*,void*));
 void myswap(int*,int*);
-void printArr(int*,int);
+void printArr(int*,int,bool);
 void generateArr(int*,int);
-void reverseArr(int*,int);
 int main(void){
     srand(time(NULL));
 //    freopen("o.txt","w",stdout);
     int *arr = new int[N];
     generateArr(arr,N);
     quick(arr,0,N-1,cmp);
-    printArr(arr,N);
+    bool rev = (cmp2(0,1)<0) ?  true:false;
+    printArr(arr,N,rev);
     delete[] arr;
     return 0;
 }
@@ -29,6 +30,9 @@ void generateArr(int *arr,int n){
 /* compares */
 int cmp(void *a,void *b){
     return *(int*)a-*(int*)b;
+}
+int cmp2(int a,int b){
+    return a-b;
 }
 /* quick sort */
 void quick(int *arr,int start,int ending,int (*cmp)(void*,void*)){
@@ -56,17 +60,15 @@ void myswap(int *a, int *b){
     return;
 }
 /* Print array */
-void printArr(int *arr,int n){
-    for(int i=0; i<n-1; i++)
-        printf("%d ",arr[i]);
-    printf("%d\n",arr[n-1]);
-    return;
-}
-/* Reverse array */
-void reverseArr(int *arr, int n){
-    for(int i=0;i<n/2;i++){
-        int t = arr[i];
-        arr[i] = arr[n-i-1];
-        arr[n-i-1] = t;
+void printArr(int *arr,int n,bool rev){
+    if(!rev){
+        for(int i=0; i<n-1; i++)
+            printf("%d ",arr[i]);
+        printf("%d\n",arr[n-1]);
     }
+    else{
+        for(int i=n-1;i>0;i--) printf("%d ",arr[i]);
+        printf("%d\n",arr[0]);
+    }
+    return;
 }
