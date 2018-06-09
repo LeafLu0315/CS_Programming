@@ -6,6 +6,8 @@
 void quick(void*,int,size_t,int(*cmp)(void*,void*));
 void myswap(char*,char*,size_t);
 void printArr(int*,int);
+/* Read file */
+void readFile();
 /* Testing functions */
 void testing_int(int);
 void testing_struct_intint(int);
@@ -26,13 +28,15 @@ typedef struct INTCHAR{
     char c;
 }IC;
 int main(void){
-    srand(time(NULL));  //gives the random number for pivot
-
+    /* Gives the random number based on computer's time*/
+    srand(time(NULL));
     /*parameters: 0 = small to big ; 1= big to small
      *other parameter will not be sorting */
     testing_int(0);     //testing integer random numbers
     testing_struct_intint(1);   //testing int int structure
     testing_struct_intchar(1);  //testing int char structure
+    /* Read File*/
+    readFile();
     return 0;
 }
 /* quick sort function */
@@ -172,4 +176,22 @@ void testing_struct_intchar(int action){
         if(ncase) fprintf(fout,"\n");
     }
     free(arr);
+}
+
+void readFile(){
+    #ifndef N
+    #define N 100
+    #endif
+    #ifndef FILENAME
+    #define FILENAME "int_random.bin"
+    #endif
+    char str[N];
+    FILE *fin;
+    fin = fopen(FILENAME,"rb");
+    while(1){
+        if(feof(fin)) break;
+        fgets(str,N,fin);
+        printf("%s\n",str);
+    }
+    return ;
 }
