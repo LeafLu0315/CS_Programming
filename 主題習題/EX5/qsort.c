@@ -2,7 +2,6 @@
 #include<stdlib.h>
 #include<time.h>
 #include<memory.h>
-#define N 100
 /* Functions */
 void quick(void*,int,size_t,int(*cmp)(void*,void*));
 void myswap(char*,char*,size_t);
@@ -27,47 +26,48 @@ typedef struct INTCHAR{
     char c;
 }IC;
 int main(void){
-    srand(time(NULL));
+    srand(time(NULL));  //gives the random number for pivot
+
     /*parameters: 0 = small to big ; 1= big to small
      *other parameter will not be sorting */
     testing_int(0);     //testing integer random numbers
-    testing_struct_intint(1);
-    testing_struct_intchar(1);
+    testing_struct_intint(1);   //testing int int structure
+    testing_struct_intchar(1);  //testing int char structure
     return 0;
 }
 /* quick sort function */
 void quick(void *start,int n ,size_t st ,int (*cmp)(void*,void*)){
     if(n <= 1) return;    // when size <= 1 then don't do the sorting
-    char *i,*pivot,*np,*base=(char*)start;
-    pivot = base+(n-1) * st;
+    char *i,*pivot,*base=(char*)start;  //base will be the front of the sorting array
+    pivot = base + (n-1)*st;    //first make the last one being pivot
     myswap(pivot,base + (rand()%n)*st,st);  // swapping random pivot and ending point
-    np=base;
+    char *np=base;
     for(i=base;i<pivot;i+=st) if(cmp(i,pivot)<=0){
-        myswap(i,np,st);
+        myswap(i,np,st);    //swap the position,which fulfills the compare function
         np+=st;
     }
     myswap(pivot,np,st);
-    int target=(np-base)/st;
-    quick(base,target,st,cmp);
-    quick(np+st,n-target-1,st,cmp);
+    int target=(np-base)/st;    //the new range
+    quick(base,target,st,cmp);  //left side
+    quick(np+st,n-target-1,st,cmp); //right side
     return ;
 }
 void myswap(char *a,char *b,size_t st){
-    if(a==b) return;
-    char *t=malloc(sizeof(char)*st);
+    if(a==b) return;    //if a memory is equal to b then return
+    char *t=malloc(sizeof(char)*st);    //copy the memory
     memcpy(t,a,st);
     memcpy(a,b,st);
     memcpy(b,t,st);
     free(t);
     return;
 }
-
+/* This is for user's not file*/
 void printArr(int *arr,int n){
     int i;
     for(i=0;i<n-1;i++) printf("%d ",arr[i]);
     printf("%d",arr[i]);
 }
-/* ALL compare functions */
+/* ALL compare functions bs:big to small sb:small to big*/
 int int_cmp_sb(void *a,void *b){
     return *((int*)a)-*((int*)b);   //small to big
 }
@@ -104,7 +104,7 @@ void testing_int(int action){
     /* Read the file in integer random numbers */
     fin = fopen("int_random.in","r");
     if(fin == NULL){
-        printf("Did Not Found file\n");
+        printf("Did Not Found file\n"); //file not found exception
         return;
     }
     fout = fopen("int_random.out","w");
@@ -114,7 +114,7 @@ void testing_int(int action){
         fscanf(fin,"%d",&n);
         arr = malloc(sizeof(int)*n);
         for(i=0;i<n;i++) fscanf(fin,"%d",&arr[i]);
-        if(action) quick(arr,n,sizeof(int),int_cmp_bs);
+        if(action) quick(arr,n,sizeof(int),int_cmp_bs); // cmp depends on the action
         else quick(arr,n,sizeof(int),int_cmp_sb);
         for(i=0;i<n-1;i++) fprintf(fout,"%d ",arr[i]);
         fprintf(fout,"%d",arr[i]);
@@ -127,7 +127,7 @@ void testing_struct_intint(int action){
     int ncase,n,i,counter=0;
     FILE *fin,*fout;
     II *arr;
-    /* Read the file in integer random numbers */
+    /* Read the file in integer and integer random numbers */
     fin = fopen("intint_random.in","r");
     if(fin == NULL){
         printf("Did Not Found file\n");
@@ -152,7 +152,7 @@ void testing_struct_intchar(int action){
     int ncase,n,i,counter=0;
     FILE *fin,*fout;
     IC *arr;
-    /* Read the file in integer random numbers */
+    /* Read the file in integer and char random numbers */
     fin = fopen("intchar_random.in","r");
     if(fin == NULL){
         printf("Did Not Found file\n");
