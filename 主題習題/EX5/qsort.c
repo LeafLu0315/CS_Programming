@@ -34,7 +34,7 @@ int main(void){
      *other parameter will not be sorting */
     testing_int(0);     //testing integer random numbers
     testing_struct_intint(1);   //testing int int structure
-    testing_struct_intchar(1);  //testing int char structure
+    testing_struct_intchar(0);  //testing int char structure
     /* Read File*/
     readFile();
     return 0;
@@ -106,12 +106,12 @@ void testing_int(int action){
     int ncase,n,i,*arr,counter=0;
     FILE *fin,*fout;
     /* Read the file in integer random numbers */
-    fin = fopen("int_random.in","r");
+    fin = fopen("testing\\int_random.in","r");
     if(fin == NULL){
         printf("Did Not Found file\n"); //file not found exception
         return;
     }
-    fout = fopen("int_random.out","w");
+    fout = fopen("testing\\int_random.out","w");
     fscanf(fin,"%d",&ncase);
     while(ncase--){
         fprintf(fout,"=================>Case %d Start<=================\n",counter++);
@@ -132,12 +132,12 @@ void testing_struct_intint(int action){
     FILE *fin,*fout;
     II *arr;
     /* Read the file in integer and integer random numbers */
-    fin = fopen("intint_random.in","r");
+    fin = fopen("testing\\intint_random.in","r");
     if(fin == NULL){
         printf("Did Not Found file\n");
         return;
     }
-    fout = fopen("intint_random.out","w");
+    fout = fopen("testing\\intint_random.out","w");
     fscanf(fin,"%d",&ncase);
     while(ncase--){
         fprintf(fout,"=================>Case %d Start<=================\n",counter++);
@@ -157,12 +157,12 @@ void testing_struct_intchar(int action){
     FILE *fin,*fout;
     IC *arr;
     /* Read the file in integer and char random numbers */
-    fin = fopen("intchar_random.in","r");
+    fin = fopen("testing\\intchar_random.in","r");
     if(fin == NULL){
         printf("Did Not Found file\n");
         return;
     }
-    fout = fopen("intchar_random.out","w");
+    fout = fopen("testing\\intchar_random.out","w");
     fscanf(fin,"%d",&ncase);
     while(ncase--){
         fprintf(fout,"=================>Case %d Start<=================\n",counter++);
@@ -183,7 +183,7 @@ void readFile(){
     #define N 100
     #endif
     #ifndef FILENAME
-    #define FILENAME "int_random.bin"
+    #define FILENAME "testing\\int_random.bin"
     #endif
     char str[N];
     FILE *fin;
