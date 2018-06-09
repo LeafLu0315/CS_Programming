@@ -103,6 +103,10 @@ void testing_int(int action){
     FILE *fin,*fout;
     /* Read the file in integer random numbers */
     fin = fopen("int_random.in","r");
+    if(fin == NULL){
+        printf("Did Not Found file\n");
+        return;
+    }
     fout = fopen("int_random.out","w");
     fscanf(fin,"%d",&ncase);
     while(ncase--){
@@ -125,6 +129,10 @@ void testing_struct_intint(int action){
     II *arr;
     /* Read the file in integer random numbers */
     fin = fopen("intint_random.in","r");
+    if(fin == NULL){
+        printf("Did Not Found file\n");
+        return;
+    }
     fout = fopen("intint_random.out","w");
     fscanf(fin,"%d",&ncase);
     while(ncase--){
@@ -146,6 +154,10 @@ void testing_struct_intchar(int action){
     IC *arr;
     /* Read the file in integer random numbers */
     fin = fopen("intchar_random.in","r");
+    if(fin == NULL){
+        printf("Did Not Found file\n");
+        return;
+    }
     fout = fopen("intchar_random.out","w");
     fscanf(fin,"%d",&ncase);
     while(ncase--){
