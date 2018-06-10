@@ -108,7 +108,7 @@ void testing_int(int action){
     /* Read the file in integer random numbers */
     fin = fopen("testing\\int_random.in","r");
     if(fin == NULL){
-        printf("Did Not Found file\n"); //file not found exception
+        printf("Did Not Find the file\n"); //file not found exception
         return;
     }
     fout = fopen("testing\\int_random.out","w");
@@ -134,7 +134,7 @@ void testing_struct_intint(int action){
     /* Read the file in integer and integer random numbers */
     fin = fopen("testing\\intint_random.in","r");
     if(fin == NULL){
-        printf("Did Not Found file\n");
+        printf("Did Not Find the file\n");
         return;
     }
     fout = fopen("testing\\intint_random.out","w");
@@ -159,7 +159,7 @@ void testing_struct_intchar(int action){
     /* Read the file in integer and char random numbers */
     fin = fopen("testing\\intchar_random.in","r");
     if(fin == NULL){
-        printf("Did Not Found file\n");
+        printf("Did Not Find the file\n");
         return;
     }
     fout = fopen("testing\\intchar_random.out","w");
