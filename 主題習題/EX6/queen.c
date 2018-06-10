@@ -1,9 +1,5 @@
 #include<stdio.h>
 #define MAXIMUM -1000000
-#define MAX(a,b)    ((a)>(b)) ? a:b
-#define MIN(a,b)    ((a)<(b)) ? a:b
-#define ABS(a)      ((a)>0)   ? a:-a
-#define NEGATIVE(a) ((a) < 0) ? a:-a
 #define N 25
 typedef struct{
     int row,cost;
@@ -11,11 +7,15 @@ typedef struct{
 }BOARD;
 void rec(BOARD);
 void solve(int);
+int ABS(int);
+int MAX(int,int);
+int MIN(int,int);
+int NEGATIVE(int);
 int max,n;
 int cell[N][N],val[N];
 int main(){
     int ncase,i,j;
-    freopen("eq_16.in","r",stdin);
+//    freopen("eq_16.in","r",stdin);
     scanf("%d",&ncase);
     while(ncase--){
         scanf("%d",&n); //n*n board
@@ -73,4 +73,17 @@ void rec(BOARD b){
         }
     }
     return;
+}
+
+int MAX(int a,int b){
+    return (a>b) ? a:b;
+}
+int MIN(int a,int b){
+    return (a<b) ? a:b;
+}
+int ABS(int a){
+    return (a>0) ? a:-a;
+}
+int NEGATIVE(int a){
+    return (a<0) ? a:-a;
 }
