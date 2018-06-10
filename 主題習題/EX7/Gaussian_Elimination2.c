@@ -91,10 +91,14 @@ void solve(int n,double determine){
         for(j=0;j<=n;j++) mat[i][j] /= target;  // let all divide by [i][i]
     }
     for(i=0;i<n;i++){
-        for(j=i+1;j<n;j++){
-            for(k=0;k<=n;k++){
-                mat[j][k] += (-1)*(mat[j][i]/mat[i][i]);
-            }
+        double tmp = 1/mat[i][i];
+        for(j=0;j<=n;j++) mat[i][j]*=tmp;
+        for(j=0;j<n;j++){
+            if(i==j) continue;
+            if(mat[j][i]==0) continue;
+            tmp = mat[j][i]/mat[i][i];
+            for(k=0;k<=n;k++) mat[j][k]-=tmp*mat[i][k];
+
         }
     }
     return ;
