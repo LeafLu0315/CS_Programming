@@ -1,0 +1,2 @@
+problem p3w4a: j - i is minimized;
+problem p3w4b: j - i is maximized.
