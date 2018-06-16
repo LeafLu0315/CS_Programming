@@ -6,6 +6,7 @@ int n,l,wa,wb,z,bestv,bestw;
 int w[N],v[N];
 int main(void){
     int ending=0;
+    freopen("DP_knapsack.in","r",stdin);
     while(!ending){
         sol();
         scanf("%d",&ending);
@@ -26,8 +27,8 @@ void dfs(int dep,int c,int sv,int sw){
     if(dep==n){
         if(c>=l&&sw>=wa){
             t=sv/sw;
-            if(t*sw!=sv)++t;
-            if(t>z)z=t;
+            if(t*sw!=sv) t++;
+            if(t>z) z=t;
         }
         return;
     }
