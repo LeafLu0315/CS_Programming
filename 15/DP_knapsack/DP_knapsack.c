@@ -6,7 +6,6 @@ int n,l,wa,wb,z,bestv,bestw;
 int w[N],v[N];
 int main(void){
     int ending=0;
-    freopen("DP_knapsack.in","r",stdin);
     while(!ending){
         sol();
         scanf("%d",&ending);
