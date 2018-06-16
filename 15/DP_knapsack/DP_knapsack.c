@@ -2,7 +2,7 @@
 #define N 25
 void dfs(int,int,int,int);
 void sol();
-int n,l,wa,wb,z,bestv,bestw;
+int n,l,wa,wb,z;
 int w[N],v[N];
 int main(void){
     int ending=0;
