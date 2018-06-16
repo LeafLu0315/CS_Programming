@@ -2,7 +2,7 @@
 #define N 25
 void dfs(int,int,int,int);
 void sol();
-int n,l,wa,wb,z,bestv,bestw;
+int n,l,wa,wb,ans;
 int w[N],v[N];
 int main(void){
     int ending=0;
@@ -12,12 +12,13 @@ int main(void){
     }
     return 0;
 }
+
 void sol(){
     scanf("%d%d%d%d",&n,&l,&wa,&wb);
     for(int i=0;i<n;i++) scanf("%d%d",&v[i],&w[i]);
-    z=-1;
+    ans=-1;
     dfs(0,0,0,0);
-    printf("%d\n",z);
+    printf("%d\n",ans);
 }
 
 void dfs(int dep,int c,int sv,int sw){
@@ -27,7 +28,7 @@ void dfs(int dep,int c,int sv,int sw){
         if(c>=l&&sw>=wa){
             t=sv/sw;
             if(t*sw!=sv) t++;
-            if(t>z) z=t;
+            if(t>ans) ans=t;
         }
         return;
     }
