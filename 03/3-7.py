@@ -1,0 +1,8 @@
+x1 = float(input())
+y1 = float(input())
+x2 = float(input())
+y2 = float(input())
+perimeter = 2 * (x2-x1+y2-y1)
+area = (x2-x1)*(y2-y1)
+print(perimeter)
+print(area)
